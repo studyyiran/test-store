@@ -6,13 +6,17 @@ export default function TestProps(props: { outCount: number; children: any }) {
   };
   const localHistory = useHistory();
   function reducer(state: any, action: any) {
-    console.log(props.outCount);
-    console.log(action);
+    logProps("reducer");
     return { ...state };
+  }
+  function logProps(name: string) {
+    console.log(name);
+    console.log(props);
   }
   const [state, dispatch] = useReducer(reducer, initState);
   useEffect(() => {
     const id = window.setInterval(() => {
+      logProps("useEffect");
       dispatch({
         type: "addCount",
         value: props.outCount
@@ -21,7 +25,10 @@ export default function TestProps(props: { outCount: number; children: any }) {
     return () => {
       window.clearInterval(id);
     };
-  }, [props.outCount]);
+  }, []);
+  useEffect(() => {
+    console.log("get it?");
+  }, [props]);
   return (
     <div>
       {props.outCount}
