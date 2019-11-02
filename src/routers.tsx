@@ -9,7 +9,7 @@ export default function Routers() {
       <Switch>
         {routerConfig.map(item => {
           const { path, Component } = item;
-          return <Route path={path} component={Component}></Route>;
+          return <Route key={path} path={path} component={Component}></Route>;
         })}
       </Switch>
     </BrowserRouter>
