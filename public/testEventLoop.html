@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        setTimeout(() => {
+            console.log('lase')
+        }, 0)
+        console.log(1)
+        new Promise((resolve) => {
+            resolve(4)
+            Promise.resolve().then(() => {
+                console.log(31)
+            })
+            Promise.reject().catch(() => {
+                console.log(32)
+            })
+        }).then((res) => {
+            console.log(res)
+        })
+        console.log(2)
+    </script>
+</body>
+</html>
