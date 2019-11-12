@@ -11,3 +11,7 @@ hotfix上面发生了提交.并且master也接纳了.
 我觉得正确的做法,肯定是rebase master上面的变更.
 
 a master b 是将b的特性分支,吸纳到a上面
+
+我先尝试的方式是:
+    直接将master merge过来.
+    然后我继续开发
