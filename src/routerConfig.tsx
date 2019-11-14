@@ -1,6 +1,7 @@
 import TestUseEffect from "./pages/useEffect";
 import TestPage from "./pages/testPage";
 import { AntdFormTest } from "./pages/antdForm";
+import EventLoop from "./pages/eventLoop";
 
 export const routerConfig = [
   {
@@ -14,5 +15,9 @@ export const routerConfig = [
   {
     path: "/antd",
     Component: AntdFormTest
+  },
+  {
+    path: "/eventLoop",
+    Component: EventLoop
   }
 ];

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="start">start</div>
+    <div id="click">click</div>
+    <script>
+        document.querySelector('#start').addEventListener('click', runWhileLoopForNSeconds)
+        document.querySelector('#click').addEventListener('click', main)
+        function main() {
+          console.log('stack10')
+          setTimeout(() => {
+            console.log('b0')
+            Promise.resolve().then(() => {
+              console.log('b child 1')
+              console.log('b child 2')
+            })
+          }, 0)
+          new Promise(() => {
+            Promise.resolve().then(() => {
+              console.log('statck20')
+              setTimeout(() => {
+                console.log('b1')
+              }, 0)
+              Promise.resolve().then(() => {
+                console.log('stach30')
+              })
+            })
+          })
+          console.log('stack11')
+        }
+        function runWhileLoopForNSeconds(){
+          const sec=3
+          const a = new Promise((resolve) => {
+            resolve()
+            Promise.resolve().then(() => {
+              console.log('finish')
+            })
+          })
+          a.then(() => {
+            console.log('start')
+          })
+
+          let start = Date.now(), now = start;
+          while (now - start < (sec*1000)) {
+            now = Date.now();
+          }
+
+        }
+
+
+
+    </script>
+
+</body>
+</html>
