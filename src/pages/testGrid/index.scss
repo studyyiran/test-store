@@ -1,0 +1,45 @@
+.form {
+  display: grid;
+  border: 1px solid red;
+  height: 70vh;
+  grid-template-columns: repeat(2, 100px);
+  grid-template-rows: repeat(2, 300px);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+
+  /*grid区域*/
+  justify-content: flex-end;
+  align-content: flex-end;
+
+  /*单元格 水平 竖直的拉伸*/
+  justify-items: flex-end;
+  align-items: flex-end;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+
+  /*私有区域*/
+
+}
+p {
+  background: gray;
+}
+
+/*表示父容器所占据的空间*/
+div {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  align-self: center;
+  justify-self: center;
+
+}
+
+span {
+  color: red
+}
