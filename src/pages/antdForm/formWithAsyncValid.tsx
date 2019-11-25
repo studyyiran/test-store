@@ -10,6 +10,7 @@ function FormWithAsyncValid(props: any) {
     {
       id: "email",
       label: "email",
+      validateTrigger: "onBlur",
       render: () => {
         return <Input />;
       },
@@ -26,7 +27,24 @@ function FormWithAsyncValid(props: any) {
       label: "phone",
       render: () => {
         return <Input />;
-      }
+      },
+      rules: [
+        {
+          type: 'number',
+          required: true,
+          message: 'enen'
+        },
+        {
+          validator: (rules: any, values: any, callback: any) => {
+            console.log(values);
+            if (values) {
+              callback();
+            } else {
+              callback("empty?");
+            }
+          }
+        }
+      ]
     },
     {
       render: () => {
@@ -37,9 +55,10 @@ function FormWithAsyncValid(props: any) {
 
   function onSubmitHandler(e: any) {
     e.preventDefault();
-    validateFields((errors: any, values: any) => {
+    validateFields(null, {firstFields: 'phone'}, (errors: any, values: any) => {
       if (!errors) {
         console.log(values);
+        alert('success')
       }
     });
   }
