@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Input } from "antd";
 import "./index.scss";
 
-export const FormWithAsyncValidComponent = Form.create({})(Index);
+export const FormWithAsyncValidComponent: any = Form.create({})(Index);
 
 function delay(time: number) {
   return new Promise((resolve, reject) => {
@@ -14,13 +14,16 @@ function delay(time: number) {
 }
 
 function Index(props: any) {
-  const { form } = props;
+  const { form, time } = props;
+  const [emailValue, setEmailValue] = useState("hehe");
+  console.log(time);
   const { getFieldDecorator, setFields, validateFields } = form;
   const configArr = [
     {
       id: "email",
       label: "email",
       validateTrigger: "onBlur",
+      initialValue: emailValue,
       render: () => {
         return <Input />;
       },
@@ -34,6 +37,7 @@ function Index(props: any) {
     },
     {
       id: "phone",
+      initialValue: time,
       label: "phone",
       render: () => {
         return <Input />;
@@ -87,18 +91,29 @@ function Index(props: any) {
   }
 
   return (
-    <Form onSubmit={onSubmitHandler} className="form">
-      {configArr.map(({ label, id, render, ...other }: any) => {
-        if (id) {
-          return (
-            <Form.Item label={label}>
-              {getFieldDecorator(id, { ...other })(render())}
-            </Form.Item>
-          );
-        } else {
-          return render();
-        }
-      })}
-    </Form>
+    <div>
+      <input
+        value={emailValue}
+        onChange={(e: any) => {
+          setEmailValue(e.target.value);
+        }}
+      />
+      <Form onSubmit={onSubmitHandler} className="form">
+        <Form.Item>
+          {getFieldDecorator("test", { initialValue: emailValue })(<Input />)}
+        </Form.Item>
+        {configArr.map(({ label, id, render, ...other }: any) => {
+          if (id) {
+            return (
+              <Form.Item label={label}>
+                {getFieldDecorator(id, { ...other })(render())}
+              </Form.Item>
+            );
+          } else {
+            return render();
+          }
+        })}
+      </Form>
+    </div>
   );
 }
