@@ -3,11 +3,14 @@ import { Router, Switch, Route, BrowserRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { routerConfig } from "./routerConfig";
 import { TestUseMemo, TestUseMemoContextProvider } from "./pages/useMemo";
+import { ShareComponent } from "./share/share";
 const myHistory = createBrowserHistory();
+
 
 export default function Routers() {
   return (
     <BrowserRouter>
+        <ShareComponent>
       <Switch>
         {routerConfig.map(item => {
           const { path, Component } = item;
@@ -20,6 +23,7 @@ export default function Routers() {
           );
         })}
       </Switch>
+            </ShareComponent>
     </BrowserRouter>
   );
 }

@@ -13,6 +13,8 @@ import Gate2 from "./pages/xOr/index2";
 import EasyFormReview from "./pages/easyForm";
 import { ReviewTab } from "./pages/reviewAntTab";
 import TestTs from "./pages/testTypeScript";
+import { TestModal } from "./pages/testModal";
+
 
 export const routerConfig = [
   // {
@@ -75,5 +77,9 @@ export const routerConfig = [
   {
     path: "/test-ts",
     Component: TestTs
-  }
+  },
+    {
+        path: "/testModal",
+        Component: TestModal
+    }
 ];
