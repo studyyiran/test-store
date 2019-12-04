@@ -75,9 +75,9 @@ export function testMoment() {
   ];
   console.log(
     timeArr.sort((a: any, b: any) => {
-      console.log(moment(a));
-      console.log(moment(b));
-      console.log(moment(b).isBefore(a));
+      console.log(moment(a.createdDt));
+      console.log(moment(b.createdDt));
+      console.log(moment(b.createdDt).isBefore(a.createdDt));
       return -1;
     })
   );
