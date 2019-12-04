@@ -3,6 +3,7 @@ import { Router, Switch, Route, BrowserRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { routerConfig } from "./routerConfig";
 const myHistory = createBrowserHistory();
+
 export default function Routers() {
   return (
     <BrowserRouter>
