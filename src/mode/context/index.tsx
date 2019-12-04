@@ -30,15 +30,15 @@ export interface IStoreTestNameContext extends IStoreTestNameActions {
 // store provider
 export function StoreTestNameContextProvider(props: any) {
   const initState: IStoreTestNameState = {
-    testValue: 101
+    testValue: 123
   };
   const [state, dispatch] = useReducer(reducer, initState);
   const action: IStoreTestNameActions = useGetAction(state, dispatch);
 
   // @useEffect
   useEffect(() => {
-    action.getTestAjaxValue;
-  }, [action.getTestAjaxValue]);
+    action.getTestAjaxValue();
+  }, [action, action.getTestAjaxValue]);
 
   const propsValue: IStoreTestNameContext = {
     ...action,
@@ -58,21 +58,16 @@ function useGetAction(
   state: IStoreTestNameState,
   dispatch: (action: IReducerAction) => void
 ): IStoreTestNameActions {
-  // 新增promise ref
+  // 新增promise refW
   const promiseStatus: any = useRef();
   if (!promiseStatus.current) {
     promiseStatus.current = {};
   }
   const actions: IStoreTestNameActions = {
-    getTestAjaxValue: promisify(async function() {
-      const res = await getTestAjaxResult();
-      dispatch({
-        type: storeTestNameReducerTypes.setTestValue,
-        value: res
-      });
-    })
+    getTestAjaxValue: useCallback(() => {
+      getTestAjaxResult({ test: state.testValue });
+    }, [state.testValue])
   };
-  actions.getTestAjaxValue = useCallback(actions.getTestAjaxValue, []);
   return actions;
 }
 
@@ -97,4 +92,8 @@ function reducer(state: IStoreTestNameState, action: IReducerAction) {
       newState = { ...newState };
   }
   return newState;
+}
+
+function useHaha() {
+
 }

@@ -6,8 +6,8 @@ import { getTestAjaxResultMock } from "./mock";
  * */
 export const TestAjaxUrl = "/reviewPart/getReviewList";
 
-export async function getTestAjaxResult() {
-  const res: any = await ajax.get(TestAjaxUrl);
+export async function getTestAjaxResult(data: any) {
+  const res: any = await ajax.post(TestAjaxUrl, data);
   return getTestAjaxResultMock;
   return res;
 }
