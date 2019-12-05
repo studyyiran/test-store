@@ -5,12 +5,14 @@ import EventLoop from "./pages/eventLoop";
 import TestBindJs from "./pages/testBindJs";
 import { TestReactDom } from "./pages/testReactDom";
 import { Main } from "./pages/main";
+import { TestUseMemo } from "./pages/useMemo";
 
 export const routerConfig = [
-  {
-    path: "/",
-    Component: Main
-  },
+  // {
+  //   exact: true,
+  //   path: "/",
+  //   Component: Main
+  // },
   {
     path: "/a",
     Component: TestUseEffect
@@ -34,5 +36,9 @@ export const routerConfig = [
   {
     path: "/test-react-dom",
     Component: TestReactDom
+  },
+  {
+    path: "/test-usememo",
+    Component: TestUseMemo
   }
 ];

@@ -2,6 +2,7 @@ import React from "react";
 import { Router, Switch, Route, BrowserRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { routerConfig } from "./routerConfig";
+import { TestUseMemo, TestUseMemoContextProvider } from "./pages/useMemo";
 const myHistory = createBrowserHistory();
 
 export default function Routers() {
@@ -10,9 +11,25 @@ export default function Routers() {
       <Switch>
         {routerConfig.map(item => {
           const { path, Component } = item;
-          return <Route key={path} path={path} component={Component}></Route>;
+          return (
+            <Route
+              key={path}
+              path={path}
+              component={layoutHoc(Component)}
+            ></Route>
+          );
         })}
       </Switch>
     </BrowserRouter>
   );
+}
+
+function layoutHoc(Component: any) {
+  return (props: any) => {
+    return (
+      <TestUseMemoContextProvider>
+        <Component {...props} />
+      </TestUseMemoContextProvider>
+    );
+  };
 }
