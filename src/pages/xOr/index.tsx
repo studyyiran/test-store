@@ -45,11 +45,10 @@ function RenderFormInner(props: any) {
     console.log(e);
   }
   return (
-    <Form onSubmit={onSubmitHandler}>
+    <Form onSubmit={onSubmitHandler} onChange={onSubmitHandler}>
       {/*<Item>{getFieldDecorator("hehe", {})(<Input />)}</Item>*/}
       {/*{mapInner()}*/}
       <MapInner getFieldDecorator={getFieldDecorator}>{children}</MapInner>
-      <Button htmlType="submit">post</Button>
     </Form>
   );
 }
@@ -57,11 +56,12 @@ function RenderFormInner(props: any) {
 function MapInner(props: any) {
   const { children, getFieldDecorator } = props;
   const arr: any[] = [];
+  function InnerCom(props: any) {
+    return <Input {...props} />;
+    // return React.cloneElement(child);
+  }
+
   React.Children.forEach(children, child => {
-    function InnerCom() {
-      return <Input />;
-      // return React.cloneElement(child);
-    }
     const dom = getFieldDecorator(child.props.id, {
       rules: [{ required: true }]
     })(<InnerCom></InnerCom>);
