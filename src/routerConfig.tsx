@@ -6,6 +6,7 @@ import TestBindJs from "./pages/testBindJs";
 import { TestReactDom } from "./pages/testReactDom";
 import { Main } from "./pages/main";
 import { TestUseMemo } from "./pages/useMemo";
+import CloneElement from "./pages/cloneElement";
 
 export const routerConfig = [
   // {
@@ -40,5 +41,9 @@ export const routerConfig = [
   {
     path: "/test-usememo",
     Component: TestUseMemo
+  },
+  {
+    path: "/clone-element",
+    Component: CloneElement
   }
 ];
