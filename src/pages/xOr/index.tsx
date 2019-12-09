@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Form, Button } from "antd";
 const { Item } = Form;
 
@@ -8,21 +8,32 @@ const RenderForm: any = Form.create({})(RenderFormInner);
 一盒黑盒子
  */
 export function GateBox(props: any) {
+  const [boolOutput, setBoolOutput] = useState("");
   const { enterArr, logicFunc, children } = props;
-  // function getResult() {
-  //   const result = enterArr.reduce((a: any, b: any) => logicFunc);
-  //   console.log(result);
-  //   return result ? "true" : "false";
-  // }
-
+  function getResult(result: any) {
+    const answer = Object.keys(result)
+      .map((item: any) => {
+        const haha = Boolean(Number(result[item]));
+        return haha;
+      })
+      .reduce(logicFunc)
+      ? "true"
+      : "false";
+    setBoolOutput(answer);
+    return answer;
+  }
+  console.log(boolOutput);
   return (
-    <RenderForm
-      onChange={(result: any) => {
-        console.log(result);
-      }}
-    >
-      {children}
-    </RenderForm>
+    <div>
+      <RenderForm
+        onChange={(result: any) => {
+          console.log(getResult(result));
+        }}
+      >
+        {children}
+      </RenderForm>
+      <span>answer is {boolOutput}</span>
+    </div>
   );
 }
 
@@ -33,16 +44,12 @@ function RenderFormInner(props: any) {
   function onSubmitHandler(e: any) {
     e.preventDefault();
     const result = getFieldsValue();
-    console.log(result);
     validateFields((errors: any, values: any) => {
-      console.log(errors);
-      console.log(values);
       if (errors) {
       } else {
         onChange(values);
       }
     });
-    console.log(e);
   }
   return (
     <Form onSubmit={onSubmitHandler} onChange={onSubmitHandler}>
