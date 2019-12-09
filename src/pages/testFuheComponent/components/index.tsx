@@ -27,9 +27,16 @@ export function UpdateFormLayout(props: IHehe) {
     }
 
     function renderChildren(children: any) {
+        // 反射
         return React.Children.map(children, (child) => {
             console.log(child instanceof UpdateFormLayout.RenderButton)
+            // 注入
+            return React.cloneElement(child, {
+                isEdit,
+                setIsEdit
+            });
             if (child.type instanceof UpdateFormLayout.RenderButton) {
+                debugger
                 // 如果有那啥 就注入进去
                 // 这块为什么不能直接返还jsx?
                 // 这个方法三个参数是什么含义
@@ -54,7 +61,7 @@ export function UpdateFormLayout(props: IHehe) {
 }
 
 UpdateFormLayout.RenderButton = function RenderButton(props: any) {
-    const { isEdit, setIsEdit } = props;
+    const { isEdit, setIsEdit, children } = props;
     if (isEdit) {
         return (
             <div
@@ -62,7 +69,7 @@ UpdateFormLayout.RenderButton = function RenderButton(props: any) {
                     setIsEdit(false);
                 }}
             >
-                Update
+                Update{children}
             </div>
         );
     } else {
