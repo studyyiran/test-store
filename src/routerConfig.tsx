@@ -7,6 +7,7 @@ import { TestReactDom } from "./pages/testReactDom";
 import { Main } from "./pages/main";
 import { TestUseMemo } from "./pages/useMemo";
 import CloneElement from "./pages/cloneElement";
+import TestFuheComponent from "./pages/testFuheComponent";
 
 export const routerConfig = [
   // {
@@ -45,5 +46,9 @@ export const routerConfig = [
   {
     path: "/clone-element",
     Component: CloneElement
+  },
+  {
+    path: "/test-fuhe",
+    Component: TestFuheComponent
   }
 ];
