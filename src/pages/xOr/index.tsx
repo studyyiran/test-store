@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Form, Button } from "antd";
 const { Item } = Form;
 
 const RenderForm: any = Form.create({})(RenderFormInner);
 
 /*
-一盒黑盒子
+
  */
 export function GateBox(props: any) {
-  const { enterArr, logicFunc, children, setBoolOutput } = props;
+  const { enterArr, logicFunc, children, getAnswerCallBack } = props;
   function getResult(result: any) {
     const answer = Object.keys(result)
       .map((item: any) => {
@@ -16,19 +16,17 @@ export function GateBox(props: any) {
         return haha;
       })
       .reduce(logicFunc);
-    setBoolOutput(answer);
     return answer;
   }
   return (
-    <>
-      <RenderForm
-        onChange={(result: any) => {
-          console.log(getResult(result));
-        }}
-      >
-        {children}
-      </RenderForm>
-    </>
+    <RenderForm
+      onChange={(result: any) => {
+        // const answer = getResult(result);
+        // getAnswerCallBack && getAnswerCallBack(answer);
+      }}
+    >
+      {children}
+    </RenderForm>
   );
 }
 
@@ -42,7 +40,7 @@ function RenderFormInner(props: any) {
     validateFields((errors: any, values: any) => {
       if (errors) {
       } else {
-        onChange(values);
+        // onChange(values);
       }
     });
   }
@@ -64,19 +62,60 @@ function MapInner(props: any) {
   }
 
   React.Children.forEach(children, child => {
-    const dom = getFieldDecorator(child.props.id, {
-      rules: [{ required: true }]
-    })(<InnerCom></InnerCom>);
-    arr.push(<Item>{dom}</Item>);
+    console.log(child);
+    if (child.props.id) {
+      console.log(child.props);
+      console.log(child.props["data-value"]);
+      const dom = getFieldDecorator(child.props.id, {
+        initialValue: child.props["data-value"],
+        rules: [{ required: true }]
+      })(<InnerCom></InnerCom>);
+      arr.push(<Item>{dom}</Item>);
+    } else {
+      console.log(child);
+      arr.push(child);
+    }
   });
   return arr as any;
 }
 
 /*
-带有逻辑单元的电路
+带有逻辑单元的
  */
 
-export function XORGATEBOX() {
+function OrGate() {
+  const [boolOutput, setBoolOutput] = useState(123);
+  function orLogic(a: any, b: any) {
+    if (a === true) {
+      return 1;
+    }
+    if (b === true) {
+      return 1;
+    }
+    return 0;
+  }
+  useEffect(() => {
+    window.setInterval(() => {
+      setBoolOutput(count => count + 1);
+    }, 1000);
+  }, []);
+  return [
+    <GateBox
+      logicFunc={orLogic}
+      getAnswerCallBack={(value: any) => {
+          debugger
+        setBoolOutput(value);
+      }}
+    >
+      <Enter id={"h1"} />
+      <Enter id={"h2"} />
+    </GateBox>,
+    <div>hehe:{boolOutput}</div>,
+    <Input data-value={boolOutput} id={"or"} />
+  ] as any;
+}
+
+export default function A() {
   const [boolOutput, setBoolOutput] = useState("");
   function orLogic(a: any, b: any) {
     if (a === true) {
@@ -85,32 +124,39 @@ export function XORGATEBOX() {
     if (b === true) {
       return 1;
     }
-    return 0
+    return 0;
   }
-  function hehe() {}
   return (
-    <>
-      <GateBox
-        logicFunc={orLogic}
-        setBoolOutput={(value: any) => {
-          setBoolOutput(value);
-        }}
-      >
-        <Enter id={"h1"} />
-        <Enter id={"h2"} />
-      </GateBox>
-      <Output value={boolOutput} />
-    </>
+    <GateBox
+      logicFunc={orLogic}
+      getAnswerCallBack={(value: any) => {
+        setBoolOutput(value);
+      }}
+    >
+      {OrGate()}
+    </GateBox>
   );
+
+  // @ts-ignore
+  return [
+    <GateBox
+      logicFunc={orLogic}
+      setBoolOutput={(value: any) => {
+        setBoolOutput(value);
+      }}
+    >
+      {/*<OrGate />*/}
+      {OrGate()}
+    </GateBox>,
+    <Input value={boolOutput} id={"good"} />
+  ];
 }
 /*
 
 最基本的输入
  */
 export function Enter(props: any) {
-  console.log('hehehehe')
-  console.log(props)
-  return <Input id={"o1"} data-type="input" {...props} />;
+  return <Input {...props} />;
 }
 
 /*
@@ -118,5 +164,5 @@ export function Enter(props: any) {
 最基本的输出
  */
 export function Output(props: any) {
-  return <Input data-type="output" {...props} />;
+  return <Input {...props} />;
 }

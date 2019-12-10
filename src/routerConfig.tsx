@@ -8,7 +8,7 @@ import { Main } from "./pages/main";
 import { TestUseMemo } from "./pages/useMemo";
 import CloneElement from "./pages/cloneElement";
 import TestFuheComponent from "./pages/testFuheComponent";
-import { XORGATEBOX } from "./pages/xOr";
+import Gate from "./pages/xOr";
 
 export const routerConfig = [
   // {
@@ -54,6 +54,6 @@ export const routerConfig = [
   },
   {
     path: "/gate-box",
-    Component: XORGATEBOX
+    Component: Gate
   }
 ];
