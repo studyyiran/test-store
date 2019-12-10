@@ -25,8 +25,7 @@ return <div>{contents}</div>
 
 最后的tabPane组件,只不过完成了最简单的渲染.
 
-类似的.tabbar也是相同的.
-
+类似的.tabbar也是相同的. 
 
 TabContent
 TabPane
