@@ -10,6 +10,7 @@ import CloneElement from "./pages/cloneElement";
 import TestFuheComponent from "./pages/testFuheComponent";
 import Gate from "./pages/xOr";
 import EasyFormReview from "./pages/easyForm";
+import { ReviewTab } from "./pages/reviewAntTab";
 
 export const routerConfig = [
   // {
@@ -60,5 +61,9 @@ export const routerConfig = [
   {
     path: "/easy-form-review",
     Component: EasyFormReview
+  },
+  {
+    path: "/review-tab",
+    Component: ReviewTab
   }
 ];
