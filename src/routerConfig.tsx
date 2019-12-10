@@ -5,10 +5,11 @@ import EventLoop from "./pages/eventLoop";
 import TestBindJs from "./pages/testBindJs";
 import { TestReactDom } from "./pages/testReactDom";
 import { Main } from "./pages/main";
-import {TestUseMemo} from "./pages/useMemo/index";
+import { TestUseMemo } from "./pages/useMemo/index";
 import CloneElement from "./pages/cloneElement";
 import TestFuheComponent from "./pages/testFuheComponent";
 import Gate from "./pages/xOr";
+import EasyFormReview from "./pages/easyForm";
 
 export const routerConfig = [
   // {
@@ -55,5 +56,9 @@ export const routerConfig = [
   {
     path: "/gate-box",
     Component: Gate
+  },
+  {
+    path: "/easy-form-review",
+    Component: EasyFormReview
   }
 ];
