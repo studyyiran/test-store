@@ -8,7 +8,7 @@ const RenderForm: any = Form.create({})(RenderFormInner);
 
  */
 export function GateBox(props: any) {
-  const { enterArr, logicFunc, children, getAnswerCallBack } = props;
+  const { logicFunc, children, getAnswerCallBack } = props;
   function getResult(result: any) {
     const answer = Object.keys(result)
       .map((item: any) => {
@@ -21,8 +21,8 @@ export function GateBox(props: any) {
   return (
     <RenderForm
       onChange={(result: any) => {
-        // const answer = getResult(result);
-        // getAnswerCallBack && getAnswerCallBack(answer);
+        const answer = getResult(result);
+        getAnswerCallBack && getAnswerCallBack(answer);
       }}
     >
       {children}
@@ -37,12 +37,13 @@ function RenderFormInner(props: any) {
   function onSubmitHandler(e: any) {
     e.preventDefault();
     const result = getFieldsValue();
-    validateFields((errors: any, values: any) => {
-      if (errors) {
-      } else {
-        // onChange(values);
-      }
-    });
+    onChange(result);
+    // validateFields((errors: any, values: any) => {
+    //   if (errors) {
+    //   } else {
+    //     //
+    //   }
+    // });
   }
   return (
     <Form onSubmit={onSubmitHandler} onChange={onSubmitHandler}>
@@ -62,17 +63,13 @@ function MapInner(props: any) {
   }
 
   React.Children.forEach(children, child => {
-    console.log(child);
     if (child.props.id) {
-      console.log(child.props);
-      console.log(child.props["data-value"]);
       const dom = getFieldDecorator(child.props.id, {
         initialValue: child.props["data-value"],
         rules: [{ required: true }]
       })(<InnerCom></InnerCom>);
       arr.push(<Item>{dom}</Item>);
     } else {
-      console.log(child);
       arr.push(child);
     }
   });
@@ -94,16 +91,12 @@ function OrGate() {
     }
     return 0;
   }
-  useEffect(() => {
-    window.setInterval(() => {
-      setBoolOutput(count => count + 1);
-    }, 1000);
-  }, []);
+
   return [
     <GateBox
       logicFunc={orLogic}
       getAnswerCallBack={(value: any) => {
-          debugger
+        console.log(value)
         setBoolOutput(value);
       }}
     >
@@ -116,7 +109,7 @@ function OrGate() {
 }
 
 export default function A() {
-  const [boolOutput, setBoolOutput] = useState("");
+  const [boolOutput, setBoolOutput] = useState(456);
   function orLogic(a: any, b: any) {
     if (a === true) {
       return 1;
@@ -126,29 +119,20 @@ export default function A() {
     }
     return 0;
   }
-  return (
-    <GateBox
-      logicFunc={orLogic}
-      getAnswerCallBack={(value: any) => {
-        setBoolOutput(value);
-      }}
-    >
-      {OrGate()}
-    </GateBox>
-  );
-
   // @ts-ignore
   return [
     <GateBox
       logicFunc={orLogic}
-      setBoolOutput={(value: any) => {
+      getAnswerCallBack={(value: any) => {
+        console.log(value)
         setBoolOutput(value);
       }}
     >
-      {/*<OrGate />*/}
+      {OrGate()}
       {OrGate()}
     </GateBox>,
-    <Input value={boolOutput} id={"good"} />
+    <div>hehe:{boolOutput}</div>,
+    <Input data-value={boolOutput} id={"good"} />
   ];
 }
 /*
