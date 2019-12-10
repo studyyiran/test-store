@@ -10,13 +10,10 @@ const RenderForm: any = Form.create({})(RenderFormInner);
 export function GateBox(props: any) {
   const { logicFunc, children, getAnswerCallBack } = props;
   function getResult(result: any) {
-    const answer = Object.keys(result)
-      .map((item: any) => {
-        const haha = Boolean(Number(result[item]));
-        return haha;
-      })
-      .reduce(logicFunc);
-    return answer;
+    const arr = Object.keys(result).map((item: any) => {
+      return Boolean(Number(result[item]));
+    });
+    return arr.reduce(logicFunc, arr[0]);
   }
   return (
     <RenderForm
@@ -84,7 +81,8 @@ function MapInner(props: any) {
 带有逻辑单元的
  */
 
-function OrGate(id: string) {
+function OrGate(props: any) {
+  const { id = "" } = props;
   const [boolOutput, setBoolOutput] = useState(123);
   function orLogic(a: any, b: any) {
     if (a === true) {
@@ -107,21 +105,79 @@ function OrGate(id: string) {
       <Enter id={"h1"} />
       <Enter id={"h2"} />
     </GateBox>,
-    <div>hehe:{boolOutput}</div>,
-    Output({ id: id, boolOutput })
+    <div>
+      {id}:{boolOutput}
+    </div>,
+    Output({ id: id, boolOutput: props.boolOutput || boolOutput })
   ] as any;
 }
 
-export default function A() {
+function AndGate(props: any) {
+  const { id = "" } = props;
+  const [boolOutput, setBoolOutput] = useState(123);
+  function orLogic(a: any, b: any) {
+    if (a && b) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  return [
+    <GateBox
+      logicFunc={orLogic}
+      getAnswerCallBack={(value: any) => {
+        // console.log(value)
+        setBoolOutput(value);
+      }}
+    >
+      <Enter id={"h1"} />
+      <Enter id={"h2"} />
+    </GateBox>,
+    <div>
+      {id}:{boolOutput}
+    </div>,
+    Output({ id: id, boolOutput: props.boolOutput || boolOutput })
+  ] as any;
+}
+
+function NotGate(props: any) {
+  const { id = "" } = props;
+  const [boolOutput, setBoolOutput] = useState(123);
+  function orLogic(a: any) {
+    if (a === true) {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
+
+  return [
+    <GateBox
+      logicFunc={orLogic}
+      getAnswerCallBack={(value: any) => {
+        // console.log(value)
+        setBoolOutput(value);
+      }}
+    >
+      <Enter id={"e1"} />
+    </GateBox>,
+    <div>
+      {id}:{boolOutput}
+    </div>,
+    Output({ id: id, boolOutput: props.boolOutput || boolOutput })
+  ] as any;
+}
+
+export default function XOR(props: any) {
+  const { id = "XOR" } = props;
   const [boolOutput, setBoolOutput] = useState(456);
   function orLogic(a: any, b: any) {
     if (a === true) {
+      return 0;
+    } else {
       return 1;
     }
-    if (b === true) {
-      return 1;
-    }
-    return 0;
   }
   // @ts-ignore
   return [
@@ -132,10 +188,13 @@ export default function A() {
         setBoolOutput(value);
       }}
     >
-      {OrGate("or1")}
-      {OrGate("or2")}
+      {AndGate({ id: "and" })}
+      {/*{NotGate({ id: "not" })}*/}
+      {/*{OrGate("or")}*/}
     </GateBox>,
-    <div>hehe:{boolOutput}</div>,
+    <div>
+      {id}: {boolOutput}
+    </div>,
     Output({ id: "good", boolOutput })
   ];
 }

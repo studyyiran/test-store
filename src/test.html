@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        {
-            var name = 'abc'
-            // scope
-            function a () {
-                var name = 'cindy'
-            }
-            function b() {
-
-            }
-            function c() {
-
-            }
+      const boolArr = [1, 0];
+      function test(a, b) {
+          if (a) {
+              return
+          }
+        return !a;
+        if (a && b) {
+          return 1;
+        } else {
+          return 0;
         }
-
-
-        10101010
-
+      }
+      const result = boolArr.reduce(test, boolArr[0]);
+      console.log(result);
     </script>
-</body>
+  </body>
 </html>
