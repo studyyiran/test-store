@@ -22,8 +22,10 @@ export function GateBox(props: any) {
     <RenderForm
       onChange={(result: any) => {
         const answer = getResult(result);
+        // console.log(answer)
         getAnswerCallBack && getAnswerCallBack(answer);
       }}
+      {...props}
     >
       {children}
     </RenderForm>
@@ -36,8 +38,12 @@ function RenderFormInner(props: any) {
 
   function onSubmitHandler(e: any) {
     e.preventDefault();
-    const result = getFieldsValue();
-    onChange(result);
+    window.setTimeout(() => {
+      const result = getFieldsValue();
+      console.log(result);
+      onChange(result);
+    }, 0);
+
     // validateFields((errors: any, values: any) => {
     //   if (errors) {
     //   } else {
@@ -46,10 +52,12 @@ function RenderFormInner(props: any) {
     // });
   }
   return (
-    <Form onSubmit={onSubmitHandler} onChange={onSubmitHandler}>
+    <Form onChange={onSubmitHandler}>
       {/*<Item>{getFieldDecorator("hehe", {})(<Input />)}</Item>*/}
       {/*{mapInner()}*/}
-      <MapInner getFieldDecorator={getFieldDecorator}>{children}</MapInner>
+      <MapInner getFieldDecorator={getFieldDecorator} {...props}>
+        {children}
+      </MapInner>
     </Form>
   );
 }
@@ -57,17 +65,13 @@ function RenderFormInner(props: any) {
 function MapInner(props: any) {
   const { children, getFieldDecorator } = props;
   const arr: any[] = [];
-  function InnerCom(props: any) {
-    return <Input {...props} />;
-    // return React.cloneElement(child);
-  }
 
   React.Children.forEach(children, child => {
     if (child.props.id) {
       const dom = getFieldDecorator(child.props.id, {
         initialValue: child.props["data-value"],
         rules: [{ required: true }]
-      })(<InnerCom></InnerCom>);
+      })(<Input {...child.props} />);
       arr.push(<Item>{dom}</Item>);
     } else {
       arr.push(child);
@@ -80,7 +84,7 @@ function MapInner(props: any) {
 带有逻辑单元的
  */
 
-function OrGate() {
+function OrGate(id: string) {
   const [boolOutput, setBoolOutput] = useState(123);
   function orLogic(a: any, b: any) {
     if (a === true) {
@@ -96,7 +100,7 @@ function OrGate() {
     <GateBox
       logicFunc={orLogic}
       getAnswerCallBack={(value: any) => {
-        console.log(value)
+        // console.log(value)
         setBoolOutput(value);
       }}
     >
@@ -104,7 +108,7 @@ function OrGate() {
       <Enter id={"h2"} />
     </GateBox>,
     <div>hehe:{boolOutput}</div>,
-    <Input data-value={boolOutput} id={"or"} />
+    Output({ id: id, boolOutput })
   ] as any;
 }
 
@@ -124,15 +128,15 @@ export default function A() {
     <GateBox
       logicFunc={orLogic}
       getAnswerCallBack={(value: any) => {
-        console.log(value)
+        // console.log(value)
         setBoolOutput(value);
       }}
     >
-      {OrGate()}
-      {OrGate()}
+      {OrGate("or1")}
+      {OrGate("or2")}
     </GateBox>,
     <div>hehe:{boolOutput}</div>,
-    <Input data-value={boolOutput} id={"good"} />
+    Output({ id: "good", boolOutput })
   ];
 }
 /*
@@ -148,5 +152,5 @@ export function Enter(props: any) {
 最基本的输出
  */
 export function Output(props: any) {
-  return <Input {...props} />;
+  return <Input {...props} data-value={props.boolOutput} disabled={true} />;
 }
