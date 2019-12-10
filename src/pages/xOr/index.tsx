@@ -8,23 +8,19 @@ const RenderForm: any = Form.create({})(RenderFormInner);
 一盒黑盒子
  */
 export function GateBox(props: any) {
-  const [boolOutput, setBoolOutput] = useState("");
-  const { enterArr, logicFunc, children } = props;
+  const { enterArr, logicFunc, children, setBoolOutput } = props;
   function getResult(result: any) {
     const answer = Object.keys(result)
       .map((item: any) => {
         const haha = Boolean(Number(result[item]));
         return haha;
       })
-      .reduce(logicFunc)
-      ? "true"
-      : "false";
+      .reduce(logicFunc);
     setBoolOutput(answer);
     return answer;
   }
-  console.log(boolOutput);
   return (
-    <div>
+    <>
       <RenderForm
         onChange={(result: any) => {
           console.log(getResult(result));
@@ -32,8 +28,7 @@ export function GateBox(props: any) {
       >
         {children}
       </RenderForm>
-      <span>answer is {boolOutput}</span>
-    </div>
+    </>
   );
 }
 
@@ -78,31 +73,50 @@ function MapInner(props: any) {
 }
 
 /*
-最基本的电路输入
- */
-export function Enter(props: any) {
-  return <Input {...props} />;
-}
-
-/*
 带有逻辑单元的电路
  */
 
 export function XORGATEBOX() {
+  const [boolOutput, setBoolOutput] = useState("");
   function orLogic(a: any, b: any) {
     if (a === true) {
-      return true;
+      return 1;
     }
     if (b === true) {
-      return true;
+      return 1;
     }
+    return 0
   }
+  function hehe() {}
   return (
-    <div>
-      <GateBox logicFunc={orLogic}>
+    <>
+      <GateBox
+        logicFunc={orLogic}
+        setBoolOutput={(value: any) => {
+          setBoolOutput(value);
+        }}
+      >
         <Enter id={"h1"} />
         <Enter id={"h2"} />
       </GateBox>
-    </div>
+      <Output value={boolOutput} />
+    </>
   );
+}
+/*
+
+最基本的输入
+ */
+export function Enter(props: any) {
+  console.log('hehehehe')
+  console.log(props)
+  return <Input id={"o1"} data-type="input" {...props} />;
+}
+
+/*
+
+最基本的输出
+ */
+export function Output(props: any) {
+  return <Input data-type="output" {...props} />;
 }
