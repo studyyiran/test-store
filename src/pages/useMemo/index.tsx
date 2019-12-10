@@ -23,16 +23,31 @@ interface IContextValue {
   actions: any;
   dispatch: any;
   state: {
+    test1: any;
     test2: string;
   };
 }
 function reducer(state: any, actions: any) {
+  const { type, value } = actions;
+  switch (type) {
+    case "add":
+      return { ...state, test2: state.test2 + value };
+      break;
+    case "add2":
+      return { ...state, test1: { value: state.test1.value + value } };
+      break;
+  }
   return { ...state };
 }
 export function TestUseMemoContextProvider(props: any) {
   const [count, setCount] = useState(1);
   const [test, setTest] = useState("hello world");
-  const [state, dispatch] = useReducer(reducer, { test2: "test2" });
+  const [state, dispatch] = useReducer(reducer, {
+    test1: {
+      value: "test11111"
+    },
+    test2: "test2"
+  });
   const randomValue = useMemo(() => {
     return count * Math.random();
   }, [count]);
@@ -51,7 +66,6 @@ export function TestUseMemoContextProvider(props: any) {
       {props.children}
     </TestUseMemoContext.Provider>
   );
-  return <div>{randomValue}</div>;
 }
 
 export function TestUseMemo2() {
@@ -88,7 +102,11 @@ export function TestUseMemo() {
 
   useEffect(() => {
     console.log(state.test2);
-  }, [randomValue, state.test2]);
+  }, [state.test2]);
+
+  useEffect(() => {
+    console.log(state.test1.value);
+  }, [state.test1]);
   return (
     <div>
       <div>
@@ -100,15 +118,27 @@ export function TestUseMemo() {
         <span>child value is </span>
         {randomValue}
       </div>
-      aaaa
-      <div>{state.test2}</div>
-      bbbb
+      <div>
+        <span
+          onClick={() => {
+            dispatch({
+              type: "add2",
+              value: "bbb"
+            });
+          }}
+        >
+          test value is
+        </span>
+        {state.test2}
+      </div>
+      {state.test1.value}
     </div>
   );
 }
 
 /*
-现在有个问题就是 useState 配合context 是不变的
-而useReducer就有这个问题  他和reducer一样.每次都是全新的.这就恶心了?这个问题的根源是在哪里呢.这会带来大量的reReder.
-这个有空在完整测试一下.然后这个问题就解决了.我就可以继续写了
+这个Demo  并不是验证useMemo  他验证了这种写法的可行性.useReducer虽然每次都是全新的值,但是很神奇的是,它能够有稳定的依赖关系.
+这里面的原理我真的不知道.完全不知道.我也暂时不想知道.
+
+所以我依然搞不懂,什么时候context里面的value,值的我加上useMemo,来解决什么问题
  */
