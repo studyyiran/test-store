@@ -3,11 +3,21 @@ import { Form, Button, Input } from "antd";
 const { Item } = Form;
 
 const EasyFormReview = Form.create({})(FormInnerWrapper);
-export default EasyFormReview
+export default EasyFormReview;
 function FormInnerWrapper(props: any) {
   const config = [
     {
       id: "i1",
+      validateTrigger: 'onBlur',
+      rules: [
+        {
+          required: true
+        }
+      ]
+    },
+    {
+      id: "i2",
+      validateTrigger: 'onBlur',
       rules: [
         {
           required: true
@@ -18,7 +28,7 @@ function FormInnerWrapper(props: any) {
   return (
     <FormInner {...props}>
       {config.map(item => {
-        return <Input {...item} />;
+        return <Input key={item.id} {...item} />;
       })}
     </FormInner>
   );
@@ -26,11 +36,17 @@ function FormInnerWrapper(props: any) {
 
 function FormInner(props: any) {
   const { form, children } = props;
-  const { getFieldDecorator, getFieldValue } = form;
+  const { getFieldDecorator, getFieldsValue, validateFields } = form;
   function onSubmitHandler(e: any) {
     e.preventDefault();
-    const values = getFieldValue();
-    console.log(values);
+    const values = getFieldsValue();
+    validateFields((errors: any, values: any) => {
+      if (!errors) {
+        console.log(values);
+      } else {
+        console.error(errors)
+      }
+    });
   }
   return (
     <Form onSubmit={onSubmitHandler}>
@@ -44,14 +60,14 @@ function ChildrenToDomArr(children: any, getFieldDecorator: any) {
   const arr: any[] = [];
   // 反射
   React.Children.forEach(children, child => {
-    const { id, rules } = child.props;
-    arr.push(
-      <Item>
-        {getFieldDecorator(id, {
-          rules
-        })(React.cloneElement(child))}
-      </Item>
-    );
+    const { id, ...other } = child.props;
+    if (id) {
+      arr.push(
+        <Item key={id}>
+          {getFieldDecorator(id, { ...other })(React.cloneElement(child))}
+        </Item>
+      );
+    }
   });
   return arr;
 }
