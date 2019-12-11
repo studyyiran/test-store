@@ -8,7 +8,8 @@ import { Main } from "./pages/main";
 import { TestUseMemo } from "./pages/useMemo/index";
 import CloneElement from "./pages/cloneElement";
 import TestFuheComponent from "./pages/testFuheComponent";
-import Gate from "./pages/xOr";
+import Gate from "./pages/xOr/index";
+import Gate2 from "./pages/xOr/index2";
 import EasyFormReview from "./pages/easyForm";
 import { ReviewTab } from "./pages/reviewAntTab";
 
@@ -57,6 +58,10 @@ export const routerConfig = [
   {
     path: "/gate-box",
     Component: Gate
+  },
+  {
+    path: "/gate-box-2",
+    Component: Gate2
   },
   {
     path: "/easy-form-review",
