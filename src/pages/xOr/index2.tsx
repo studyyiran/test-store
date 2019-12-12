@@ -70,6 +70,23 @@ const gateXOR2: ICommonInput = (inputA, inputB) => {
   }
 };
 
+const gateXOR3: ICommonInput = (inputA, inputB) => {
+  if (inputA !== undefined && inputB !== undefined) {
+    /*
+
+     */
+    const a = gateAnd(inputA, gateNot(inputB));
+    const b = gateAnd(inputB, gateNot(inputA));
+    // return gateAnd(gateAnd(inputA, inputB), gateAnd(gateNot(inputA), gateNot(inputB)))
+    // return gateAnd(gateNot(gateAnd(inputA, inputB)), gateNot(gateOr(inputA, inputB)))
+    // 不是 2 or 3的情况 === !2 && !3
+    return  gateAnd(gateNot(gateAnd(inputA, inputB)), gateOr(inputA, inputB))
+    // 取反(是2 or 是3) === a 且b or !(a || b)
+  } else {
+    return FALSE;
+  }
+};
+
 export default function() {
   const [valueA, setValueA] = useState(undefined);
   const [valueB, setValueB] = useState(undefined);
@@ -127,10 +144,14 @@ export default function() {
       {renderList([0, 1], gateOr, "gateOr")}
       {renderList([0, 1], gateAnd, "gateAnd")}
       {renderList([0, 1], gateNAND, "gateNAND")}
+      {renderList([0, 1], (a: number, b: number) => gateNot(gateOr(a, b)), "或非")}
 
       {renderList([0, 1], gateXOR, "gateXOR")}
       {/*<div>result gateXOR2: {gateXOR2(valueA, valueB)}</div>*/}
       {renderList([0, 1], gateXOR2, "gateXOR2")}
+
+
+      {renderList([0, 1], gateXOR3, "gateXOR3")}
     </div>
   );
 }
