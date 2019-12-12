@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const StoreTestNameContext = createContext({});
 
@@ -11,8 +11,21 @@ interface IStoreTestNameState {
 
 // store provider
 export function StoreTestNameContextProvider(props: any) {
-    const state = {
-        hehe: 'haha'
-    }
-  return <StoreTestNameContext.Provider value={state} {...props} />;
+  const [value, setValue] = useState(0);
+  // useEffect(() => {
+  //   window.setInterval(() => {
+  //     setValue(Date.now());
+  //   }, 1000);
+  // }, []);
+  return (
+    <StoreTestNameContext.Provider
+      value={{
+        timeNow: value,
+        addValue: () => {
+          setValue(value => value + 1);
+        }
+      }}
+      {...props}
+    />
+  );
 }
