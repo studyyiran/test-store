@@ -87,6 +87,17 @@ const gateXOR3: ICommonInput = (inputA, inputB) => {
   }
 };
 
+const gateXOR4: ICommonInput = (inputA, inputB) => {
+  if (inputA !== undefined && inputB !== undefined) {
+    /*
+
+     */
+    return  gateNot(gateOr(gateNot(gateAnd(inputA, inputB)), gateOr(inputA, inputB)))
+  } else {
+    return FALSE;
+  }
+};
+
 export default function() {
   const [valueA, setValueA] = useState(undefined);
   const [valueB, setValueB] = useState(undefined);
@@ -131,7 +142,7 @@ export default function() {
       </div>
     );
   }
-
+  const normalArr = [1, 0]
   return (
     <div>
       <input value={valueA} onChange={handler.bind({}, setValueA)} />
@@ -141,17 +152,19 @@ export default function() {
         <div>result gateOr: {gateOr(valueA, valueB)}</div>
       </div>
 
-      {renderList([0, 1], gateOr, "gateOr")}
-      {renderList([0, 1], gateAnd, "gateAnd")}
-      {renderList([0, 1], gateNAND, "gateNAND")}
-      {renderList([0, 1], (a: number, b: number) => gateNot(gateOr(a, b)), "或非")}
+      {renderList(normalArr, gateOr, "gateOr")}
+      {renderList(normalArr, gateAnd, "gateAnd")}
+      {renderList(normalArr, gateNAND, "gateNAND")}
+      {renderList(normalArr, (a: number, b: number) => gateNot(gateOr(a, b)), "或非")}
 
-      {renderList([0, 1], gateXOR, "gateXOR")}
+      {renderList(normalArr, gateXOR, "gateXOR")}
       {/*<div>result gateXOR2: {gateXOR2(valueA, valueB)}</div>*/}
-      {renderList([0, 1], gateXOR2, "gateXOR2")}
+      {renderList(normalArr, gateXOR2, "gateXOR2")}
 
 
-      {renderList([0, 1], gateXOR3, "gateXOR3")}
+      {renderList(normalArr, gateXOR3, "gateXOR3")}
+
+      {renderList(normalArr, gateXOR4, "gateXOR4")}
     </div>
   );
 }

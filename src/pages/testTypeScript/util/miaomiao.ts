@@ -20,8 +20,9 @@ test({
 });
 
 interface IHaha {
-  (hehe: { content: string }): string;
+  (hehe: { content: string }): number;
 }
+
 
 const haha: IHaha = props => {
   console.log(props.content);
@@ -49,7 +50,7 @@ function(x: number, y: number) : number
 let a = 1;
 let b = 2;
 function testHaha(): any {
-  console.log('123')
+  console.log("123");
 }
 
 /*
@@ -57,22 +58,21 @@ function testHaha(): any {
 第二种,是教会我,这种箭头函数,能够表达函数的定义方法(这种表达必须写完整)
 而function的定义过程中(无论是function的形式还是() =>的形式)都是可以自由定义的.也就是可以不写返回值
  */
-let myTest = function (a: string, b:string) : void {
-  return a + b
-}
+let myTest = function(a: string, b: string): any {
+  return a + b;
+};
 
 let myAdd: (aNumber: number, bNumber: number) => number = function(
-    x: number,
-    y: number
+  x: number,
+  y: number
 ): number {
   return x + y;
 };
 
-let myAddWithOutType = () : number => {
+
+let myAddWithOutType = (): number => {
   return a + b;
 };
-
-
 
 /*
 ts是按照形状来的.不能多.不能少.
