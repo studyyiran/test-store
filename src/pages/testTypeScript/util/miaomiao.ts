@@ -23,7 +23,6 @@ interface IHaha {
   (hehe: { content: string }): number;
 }
 
-
 const haha: IHaha = props => {
   console.log(props.content);
   return Number(props.content);
@@ -69,7 +68,6 @@ let myAdd: (aNumber: number, bNumber: number) => number = function(
   return x + y;
 };
 
-
 let myAddWithOutType = (): number => {
   return a + b;
 };
@@ -80,3 +78,89 @@ ts遵循按照传入值 传出值 作为左右值来进行比较.
 ts也可以用接口来描述函数.不过似乎只能用来描述箭头函数
 
  */
+
+/*
+复习函数
+ */
+
+function fa(content: string) {
+  console.log(content);
+}
+
+function fb(content: string): null {
+  console.log(content);
+  return null;
+}
+
+/*
+这个例子说明，函数返回值，都是以：的形式，添加在括号之后的
+ */
+function fc(content: number): () => number {
+  console.log(content);
+  return () => {
+    return content;
+  };
+}
+
+const ffa = () => {
+  return 123;
+};
+
+const ffb = (content: string): string => {
+  return content;
+};
+
+interface Name {
+  firstName: string;
+  lastName: string;
+}
+
+/*
+我不明白，为什么这种定义模式允许
+它能够约束调用，能够约束返回，但是没办法约束下一个函数
+ */
+
+const ffc: (name: string, age: number) => string = () => {
+  return "123";
+};
+
+ffc("1", 2);
+
+const ffe = function(a: string) {
+  return "123";
+};
+
+const ffd: (name: string, age: number) => string = function(a) {
+  return a;
+};
+
+ffc(ffe("1"), 2);
+
+/*
+所以，我个人上推荐的定义方式是。
+
+ */
+function aaa(a: string): string {
+  return a;
+}
+
+const bbb = (b: string): string => {
+  return b;
+};
+
+interface Ifunc {
+  (n: number): number;
+}
+
+let c2: Ifunc;
+c2 = () => {
+  return 1;
+};
+
+c2(2)
+
+function c1(): Ifunc {
+  return () => {
+      return 1
+  };
+}
