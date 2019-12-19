@@ -1,0 +1,29 @@
+<html>
+  <body>
+    <script>
+      let data = {
+        set a(newValue) {
+          console.log("set a with" + "new value" + newValue);
+          this.data.push(newValue);
+        },
+        get a() {
+          console.log("get a with" + this.data);
+          return this.data;
+        },
+        data: []
+      };
+
+      // data.a = "EN";
+      // console.log(data.a); // ['EN']
+
+      window.setInterval(() => {
+        data.a = "_A_";
+        var b = data.a;
+        // console.log(data.a); // ['EN', 'FA']
+      }, 1000);
+    </script>
+    <div>
+      123
+    </div>
+  </body>
+</html>
