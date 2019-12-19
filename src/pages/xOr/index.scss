@@ -1,0 +1,25 @@
+.test-gate {
+  table {
+    width: 100%;
+    tr {
+      th {
+        border: 1px solid black;
+        padding: 0 10px;
+        text-align: center;
+      }
+    }
+  }
+  .react-tag {
+    grid-column: 1/4;
+    justify-self: end;
+  }
+  .table-truth-container {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+    //align-items: center;
+    justify-items: stretch;
+  }
+}

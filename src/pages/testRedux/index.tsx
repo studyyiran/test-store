@@ -1,3 +1,8 @@
+import React from "react";
+export default function () {
+    return <div>123</div>
+}
+
 // // import React from "react";
 // // // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // // import { createStore, combineReducers, applyMiddleware } from "redux";
