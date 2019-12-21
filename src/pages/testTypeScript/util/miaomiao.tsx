@@ -233,43 +233,43 @@ start review
 import React, {useCallback} from "react";
 
 export function MiaoMiao() {
-  const a = qwe2("abc", 1, 2);
-  const obj = testThis();
-  return (
-    <span>
-      {a} {obj.getName()}
-    </span>
-  );
+  // const a = qwe2("abc", 1, 2);
+  // const obj = testThis();
+  // return (
+  //   <span>
+  //     {a} {obj.getName()}
+  //   </span>
+  // );
 }
-
-function qwe2(a: string, ...b: number[]): string {
-  return a + b.join(" ");
-}
-
-function testThis() {
-  return {
-    a: "a",
-    b: "b",
-    getName: function() {
-      const that = this;
-      return function() {
-        return this.a + that.b;
-      };
-    }
-  };
-}
-
-qwe2("123");
-
-
-function hahaha() {
-
-
-}
-
-function hehe(...hehe) {
-    const func = () => {
-
-    }
-    return func(...hehe)
-}
+//
+// function qwe2(a: string, ...b: number[]): string {
+//   return a + b.join(" ");
+// }
+//
+// function testThis() {
+//   return {
+//     a: "a",
+//     b: "b",
+//     getName: function() {
+//       const that = this;
+//       return function() {
+//         return this.a + that.b;
+//       };
+//     }
+//   };
+// }
+//
+// qwe2("123");
+//
+//
+// function hahaha() {
+//
+//
+// }
+//
+// function hehe(...hehe) {
+//     const func = () => {
+//
+//     }
+//     return func(...hehe)
+// }
