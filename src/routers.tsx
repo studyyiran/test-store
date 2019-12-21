@@ -18,7 +18,7 @@ export default function Routers() {
     <BrowserRouter>
       <ShareComponent>
         <Switch>
-          <Redirect to={current} />
+
           {routerConfig.map(item => {
             const { path, Component } = item;
             return (
@@ -29,6 +29,7 @@ export default function Routers() {
               ></Route>
             );
           })}
+          <Redirect to={current} />
         </Switch>
       </ShareComponent>
     </BrowserRouter>
