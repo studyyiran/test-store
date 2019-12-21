@@ -15,6 +15,9 @@ import { ReviewTab } from "./pages/reviewAntTab";
 import TestTs from "./pages/testTypeScript";
 import TestRedux from "./pages/testRedux";
 import { TestModal } from "./pages/testModal";
+import { MiaoMiao } from "./pages/testTypeScript/util/miaomiao";
+
+
 export const routerConfig = [
   // {
   //   exact: true,
@@ -81,6 +84,14 @@ export const routerConfig = [
     path: "/test-redux",
     Component: TestRedux
   },
+    {
+        path: "/testModal",
+        Component: TestModal
+    },
+    {
+        path: "/miaomiao",
+        Component: MiaoMiao
+    },
     {
         path: "/testModal",
         Component: TestModal
