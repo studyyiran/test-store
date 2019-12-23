@@ -18,7 +18,6 @@ export default function Routers() {
     <BrowserRouter>
       <ShareComponent>
         <Switch>
-
           {routerConfig.map(item => {
             const { path, Component } = item;
             return (
