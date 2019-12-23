@@ -39,6 +39,7 @@ function layoutHoc(Component: any) {
   return (props: any) => {
     return (
       <TestUseMemoContextProvider>
+        v12.23
         <Component {...props} />
       </TestUseMemoContextProvider>
     );
