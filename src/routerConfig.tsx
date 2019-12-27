@@ -18,6 +18,7 @@ import { TestModal } from "./pages/testModal";
 import { MiaoMiao } from "./pages/testTypeScript/util/miaomiao";
 import TestCurrency from "./pages/testCurrency";
 import TestTimer from "./pages/testTimer";
+import CostTime from "./pages/costTime";
 
 export const routerConfig = [
   // {
@@ -104,5 +105,9 @@ export const routerConfig = [
   {
     path: "/test-timer",
     Component: TestTimer
+  },
+  {
+    path: "/cost-time",
+    Component: CostTime
   }
 ];
