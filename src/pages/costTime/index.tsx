@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 
 function CostTimeCostTime(props: any) {
   console.log(props.count);
-  function renderList() {
-    const arr = [];
-    for (let i = 0; i < 10000; i++) {
-      arr.push(<li key={i}>{i}</li>);
-    }
-    return arr;
-  }
+
   return (
     <ul>
       <h1>{props.finalValue}</h1>
-      {renderList()}
+      <RenderList max={10000} />
     </ul>
   );
+}
+
+function RenderList({ max }: any): any {
+  const arr = [];
+  for (let i = 0; i < max; i++) {
+    arr.push(<li key={i}>{i}</li>);
+  }
+  return arr;
 }
 
 // const CostTime = React.memo(CostTimeCostTime, () => false)
@@ -33,19 +35,49 @@ export default function() {
       <div>
         <CostTimeContainer
           render={(props: any) => {
-            return <CostTime {...props} finalValue={'我很快' + props.finalValue} />;
+            return (
+              <CostTime {...props} finalValue={"我很快" + props.finalValue} />
+            );
           }}
         />
       </div>
       <div>
         <CostTimeContainer
           render={(props: any) => {
-            return <CostTimeCostTime {...props} finalValue={'我很慢' + props.finalValue} />;
+            return (
+              <CostTimeCostTime
+                {...props}
+                finalValue={"我很慢" + props.finalValue}
+              />
+            );
+          }}
+        />
+      </div>
+      <div>
+        <ComponentA
+          render={(value: any) => {
+            return (
+              <div>
+                <input />
+                {value}
+                <RenderList max={10000} />
+              </div>
+            );
           }}
         />
       </div>
     </div>
   );
+}
+
+function ComponentA(props: any) {
+  const [value, setValue] = useState(0);
+  // useEffect(() => {
+  //   window.setInterval(() => {
+  //     setValue(i => i + 1);
+  //   }, 1);
+  // }, []);
+  return <div>{props.render(value)}</div>;
 }
 
 function CostTimeContainer(props: any) {
