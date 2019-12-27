@@ -60,7 +60,7 @@ export default function() {
               <div>
                 <input />
                 {value}
-                <RenderList max={10000} />
+                <RenderList max={100000} />
               </div>
             );
           }}

@@ -9,53 +9,32 @@ import "./index.scss";
 import RouterLink from "../../components/routerLink";
 
 export default function TestTimer() {
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(10);
   useEffect(() => {
     const timer = window.setInterval(() => {
       setTime(t => t + 1);
-    }, 1000);
+    }, 100);
     return () => {
       debugger;
     };
   }, []);
 
-  function RenderByCondition(props: { ComA: any; ComB: any; func: any }) {
-    const { ComA, ComB, func } = props;
-    if (func()) {
-      return ComA;
-    } else {
-      return ComB;
-    }
-  }
-
   const A = (props: { time: number }) => {
     const { time } = props;
+    useEffect(() => {
+      return () => {
+        console.log("hehe");
+      };
+    }, []);
     return (
       <div className="child-component">
-        <img src={require("../../res/test.png")} />
-        {/*<RouterLink to={""}>*/}
-        {/*    <img src={require("../../res/test.png")} />*/}
-        {/*</RouterLink>*/}
-
-        {time}
+          <img src={require("../../res/test.png")} />
       </div>
     );
   };
-  const Hehe: any = useRef();
-  useEffect(() => {
-    console.log("run");
-    Hehe.current = A;
-  }, []);
-
-  const ChildComponent = Hehe.current;
-  if (!ChildComponent) {
-    return null;
-  }
-  /*
-  有key也拯救不了.因为你的Componet变化的太快了.
-   */
-  // return <A time={time} key={1} />;
-  return A({ time: time });
+  console.log(time)
+  return <A time={time} key={1} />;
+  // return A({ time: time });
   // const ChildComponent = useMemo(() => A, []);
   // const ChildComponent = useCallback(A, []);
   // const ChildComponent = React.memo((props: { time: number }) => {
@@ -71,21 +50,6 @@ export default function TestTimer() {
   //         </div>
   //     );
   // }, () => true);
-  console.log(time);
-  return <ChildComponent time={time} key={1} />;
-
-  return (
-    <div>
-      {time}
-      <RenderByCondition
-        ComA={<ChildComponent time={time} />}
-        ComB={() => {
-          return <div>123</div>;
-        }}
-        func={() => time > 0}
-      />
-    </div>
-  );
 }
 
 function TestKeys() {
