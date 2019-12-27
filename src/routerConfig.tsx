@@ -16,7 +16,8 @@ import TestTs from "./pages/testTypeScript";
 import TestRedux from "./pages/testRedux";
 import { TestModal } from "./pages/testModal";
 import { MiaoMiao } from "./pages/testTypeScript/util/miaomiao";
-
+import TestCurrency from "./pages/testCurrency";
+import TestTimer from "./pages/testTimer";
 
 export const routerConfig = [
   // {
@@ -84,16 +85,24 @@ export const routerConfig = [
     path: "/test-redux",
     Component: TestRedux
   },
-    {
-        path: "/testModal",
-        Component: TestModal
-    },
-    {
-        path: "/miaomiao",
-        Component: MiaoMiao
-    },
-    {
-        path: "/testModal",
-        Component: TestModal
-    }
+  {
+    path: "/testModal",
+    Component: TestModal
+  },
+  {
+    path: "/miaomiao",
+    Component: MiaoMiao
+  },
+  {
+    path: "/testModal",
+    Component: TestModal
+  },
+  {
+    path: "/testCurrency",
+    Component: TestCurrency
+  },
+  {
+    path: "/test-timer",
+    Component: TestTimer
+  }
 ];

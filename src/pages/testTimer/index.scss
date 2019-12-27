@@ -1,0 +1,17 @@
+.child-component {
+  //color: red;
+  //transition: all 0.1s;
+  //font-size: 10px;
+  //transform: scale(0.2);
+  //position: fixed;
+  //top: 10px;
+  //left: 10px;
+  img {
+    width: 100px;
+    transform: scale(1.2);
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+
+}

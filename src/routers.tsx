@@ -11,7 +11,7 @@ import { routerConfig } from "./routerConfig";
 import { TestUseMemo, TestUseMemoContextProvider } from "./pages/useMemo";
 import { ShareComponent } from "./share/share";
 const myHistory = createBrowserHistory();
-const current = '/gate-box-2'
+const current = routerConfig[routerConfig.length - 1].path;
 
 export default function Routers() {
   return (
