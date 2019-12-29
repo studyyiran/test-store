@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./index.scss";
 
 function CostTimeCostTime(props: any) {
@@ -13,11 +13,21 @@ function CostTimeCostTime(props: any) {
 }
 
 function RenderList({ max }: any): any {
+  useEffect(() => {
+    return () => {
+      console.log("des");
+    };
+  }, []);
   const arr = [];
   for (let i = 0; i < max; i++) {
     arr.push(<li key={i}>{i}</li>);
   }
-  return arr;
+  return (
+    <div>
+      <input />
+      {arr}
+    </div>
+  );
 }
 
 // const CostTime = React.memo(CostTimeCostTime, () => false)
@@ -29,18 +39,20 @@ const CostTime = React.memo(CostTimeCostTime, (prevProps, nextProps) => {
   }
 });
 
+const Hehe = React.memo(() => <RenderList max={8000} />, () => true);
+
 export default function() {
   return (
     <div className="cost-time-container">
-      <div>
-        <CostTimeContainer
-          render={(props: any) => {
-            return (
-              <CostTime {...props} finalValue={"我很快" + props.finalValue} />
-            );
-          }}
-        />
-      </div>
+      {/*<div>*/}
+        {/*<CostTimeContainer*/}
+          {/*render={(props: any) => {*/}
+            {/*return (*/}
+              {/*<CostTime {...props} finalValue={"我很快" + props.finalValue} />*/}
+            {/*);*/}
+          {/*}}*/}
+        {/*/>*/}
+      {/*</div>*/}
       <div>
         <CostTimeContainer
           render={(props: any) => {
@@ -53,30 +65,34 @@ export default function() {
           }}
         />
       </div>
-      <div>
-        <ComponentA
-          render={(value: any) => {
-            return (
-              <div>
-                <input />
-                {value}
-                <RenderList max={100000} />
-              </div>
-            );
-          }}
-        />
-      </div>
+      {/*<div>*/}
+      {/*<ComponentA*/}
+      {/*render={(value: any) => {*/}
+      {/*return (*/}
+      {/*<div>*/}
+      {/*{value}*/}
+      {/*<Hehe />*/}
+      {/*</div>*/}
+      {/*);*/}
+      {/*}}*/}
+      {/*/>*/}
+      {/*</div>*/}
     </div>
   );
 }
 
+
+/*
+我想证明，当父组件高频变化的时候，哪怕自组价复杂度并不高，也足够造成js计算阻塞。
+ */
+
 function ComponentA(props: any) {
   const [value, setValue] = useState(0);
-  // useEffect(() => {
-  //   window.setInterval(() => {
-  //     setValue(i => i + 1);
-  //   }, 1);
-  // }, []);
+  useEffect(() => {
+    window.setInterval(() => {
+      setValue(i => i + 1);
+    }, 1);
+  }, []);
   return <div>{props.render(value)}</div>;
 }
 
