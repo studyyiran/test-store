@@ -30,6 +30,11 @@ interface IHoc {
 这种学习就是:围绕着范式,来进行学习.这样会很有方向.
 虽然说,一个范式,后面牵扯了很多更基础的知识.你需要花费很多额外的时间完成学习.
 但是,这种学习方法仍然是高效的.
+
+这种学习方法对几个东西有奇效
+1)不知道从哪里入手,尤其是那种范围比较大,不知道怎么梳理的内容
+2)对于那种背诵,或者你不感兴趣,又想拿低保的内容
+
  */
 const HelloWrapper: IHoc = Component => {
   const useWrapper: React.FC = props => {
@@ -45,5 +50,8 @@ export const FinalHello: React.FC = HelloWrapper(Hello);
 
 
 /*
+https://www.tslang.cn/docs/handbook/functions.html
+https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter
 https://segmentfault.com/a/1190000020536678
+https://segmentfault.com/a/1190000018906665
  */
