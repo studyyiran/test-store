@@ -22,6 +22,10 @@ import TestTimer2 from "./pages/testTimer/index2";
 import CostTime from "./pages/costTime";
 import TestTsComponent from "./pages/ts";
 import {Margin1} from "./pages/cssPlayGround/margin";
+import { ReactKeys } from "./pages/reactKeys";
+import {TestKey2} from "./pages/reactKeys/testKey2";
+
+
 
 export const routerConfig = [
   // {
@@ -129,5 +133,14 @@ export const routerConfig = [
   {
     path: "/test-css-margin",
     Component: Margin1
-  }
+  },
+},
+{
+    path: "/test-react-keys",
+        Component: ReactKeys
+},
+{
+    path: "/test-react-keys2",
+        Component: TestKey2
+}
 ];
