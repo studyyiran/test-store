@@ -21,6 +21,7 @@ import TestTimer from "./pages/testTimer";
 import TestTimer2 from "./pages/testTimer/index2";
 import CostTime from "./pages/costTime";
 import TestTsComponent from "./pages/ts";
+import {Margin1} from "./pages/cssPlayGround/margin";
 
 export const routerConfig = [
   // {
@@ -124,5 +125,9 @@ export const routerConfig = [
   {
     path: "/test-ts-component",
     Component: TestTsComponent
+  },
+  {
+    path: "/test-css-margin",
+    Component: Margin1
   }
 ];
