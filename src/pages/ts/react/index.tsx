@@ -5,8 +5,8 @@ interface IProps {
   age?: number;
 }
 
-// 1 组件定义的几种方法
-const Hello: React.FC<IProps> = (props) => {
+// 1 组件定义的几种方法.这是最标准,最常规的定义方法.
+const Hello: React.FC<IProps> = props => {
   return (
     <div>
       <span>{props.name}</span>
@@ -16,7 +16,7 @@ const Hello: React.FC<IProps> = (props) => {
 };
 
 interface IHoc {
-  (func: React.FC<IProps>): React.FC;
+  (func: React.FC<IProps>): React.FC<IProps>;
 }
 
 /*
@@ -36,7 +36,9 @@ interface IHoc {
 2)对于那种背诵,或者你不感兴趣,又想拿低保的内容
 
  */
-// const HelloWrapper: IHoc = Component => {
+
+// helloWrapper是啥?是一个传入一个有特定的props的组件,返回一个通用组件的hoc
+// const HelloWrapper: IHoc = (Component) => {
 //   const useWrapper: React.FC = props => {
 //     useEffect(() => {
 //       console.log("123");
@@ -45,9 +47,29 @@ interface IHoc {
 //   };
 //   return useWrapper;
 // };
-//
-// export const FinalHello: React.FC = HelloWrapper(Hello);
 
+// 泛型
+// const HelloWrapper = <T extends object>(Component: React.FC<T>) :React.FC<T> => {
+//   const useWrapper: React.FC = props => {
+//     useEffect(() => {
+//       console.log("123");
+//     }, []);
+//     return <Component {...props as T} />;
+//   };
+//   return useWrapper;
+// };
+
+const HelloWrapper: IHoc = Component => {
+  const useWrapper: React.FC = props => {
+    useEffect(() => {
+      console.log("123");
+    }, []);
+    return <Component {...(props as IProps)} />;
+  };
+  return useWrapper;
+};
+
+export const FinalHello: React.FC<IProps> = HelloWrapper(Hello);
 
 /*
 https://www.tslang.cn/docs/handbook/functions.html

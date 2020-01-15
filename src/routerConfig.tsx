@@ -20,6 +20,7 @@ import TestCurrency from "./pages/testCurrency";
 import TestTimer from "./pages/testTimer";
 import TestTimer2 from "./pages/testTimer/index2";
 import CostTime from "./pages/costTime";
+import TestTsComponent from "./pages/ts";
 
 export const routerConfig = [
   // {
@@ -119,5 +120,9 @@ export const routerConfig = [
   {
     path: "/test-ts",
     Component: TestTs
+  },
+  {
+    path: "/test-ts-component",
+    Component: TestTsComponent
   }
 ];
