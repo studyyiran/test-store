@@ -79,10 +79,7 @@ export const routerConfig = [
     path: "/review-tab",
     Component: ReviewTab
   },
-  {
-    path: "/test-ts",
-    Component: TestTs
-  },
+
   {
     path: "/test-redux",
     Component: TestRedux
@@ -114,5 +111,13 @@ export const routerConfig = [
   {
     path: "/test-timer-2",
     Component: TestTimer2
+  },
+  {
+    path: "/ts-",
+    Component: TestTimer2
+  },
+  {
+    path: "/test-ts",
+    Component: TestTs
   }
 ];

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-// import { log } from "./util";
+import { getTotalName } from "./util/miaowu";
 
 export default function TestTs() {
   useEffect(() => {
-    // log(123);
+    getTotalName({});
   }, []);
 
   return <div>log..ing...</div>;

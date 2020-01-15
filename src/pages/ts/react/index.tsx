@@ -36,17 +36,17 @@ interface IHoc {
 2)对于那种背诵,或者你不感兴趣,又想拿低保的内容
 
  */
-const HelloWrapper: IHoc = Component => {
-  const useWrapper: React.FC = props => {
-    useEffect(() => {
-      console.log("123");
-    }, []);
-    return <Component {...props} />;
-  };
-  return useWrapper;
-};
-
-export const FinalHello: React.FC = HelloWrapper(Hello);
+// const HelloWrapper: IHoc = Component => {
+//   const useWrapper: React.FC = props => {
+//     useEffect(() => {
+//       console.log("123");
+//     }, []);
+//     return <Component {...props} />;
+//   };
+//   return useWrapper;
+// };
+//
+// export const FinalHello: React.FC = HelloWrapper(Hello);
 
 
 /*
