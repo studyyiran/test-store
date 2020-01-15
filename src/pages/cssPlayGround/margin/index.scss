@@ -1,12 +1,20 @@
 .margin {
-  div {
+  .test-margin-container {
     background: red;
+    img {
+      width: 100px;
+      float: left;
+    }
+  }
+  div {
     .test-margin {
+      position: absolute;
       //width: 400px;
       //display: inline-block;
+      // 尤其是margin-left也可以修改尺寸
       background: green;
-      margin-left: 100px;
-      margin-top: 100px;
+      margin-left: 300px;
+      //margin-top: 100px;
     }
   }
 }
