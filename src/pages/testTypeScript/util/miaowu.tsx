@@ -18,14 +18,15 @@ interface IName {
 
 // 可选参数
 interface IGetTotalName {
-  (info: IName): string;
+  (info: IName, ...arg: any[]): string;
 }
-export const getTotalName: IGetTotalName = ({
-  firstName = "firstName",
-  lastName = "lastName"
-}) => {
-  return firstName + lastName;
+// ts函数对于可选参数有包容性.也就是,如果额外的参数是可选的话,他不会被轻易约束
+export const getTotalName: IGetTotalName = (
+  { firstName = "firstName", lastName = "lastName" },
+  ...arg
+) => {
+  const hehe = arg.join("");
+  return hehe + firstName + lastName;
 };
 
 getTotalName({});
-
