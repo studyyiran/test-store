@@ -1,1 +1,5 @@
-const a = require('./a.js')
+const { firstFunc, constValue} = require("./a.js");
+const { log } = require("./b.js");
+
+firstFunc();
+log(constValue + 'finish')
