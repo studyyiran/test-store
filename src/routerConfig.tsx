@@ -25,6 +25,8 @@ import { Margin1 } from "./pages/cssPlayGround/margin";
 import { ReactKeys } from "./pages/reactKeys";
 import { TestKey2 } from "./pages/reactKeys/testKey2";
 import Inline1 from "./pages/cssPlayGround/inline";
+import TestReactFunc from "./pages/testReactFunc";
+import TestPromise from "./pages/promise";
 
 export const routerConfig = [
   // {
@@ -144,5 +146,13 @@ export const routerConfig = [
   {
     path: "/inline1",
     Component: Inline1
+  },
+  {
+    path: "/test-react-func",
+    Component: TestReactFunc
+  },
+  {
+    path: "/test-promise",
+    Component: TestPromise
   }
 ];
