@@ -1,7 +1,7 @@
 const wait= (time: number) => {
   return new Promise((resolve, reject) => {
     window.setTimeout(() => {
-      if (time > 1999) {
+      if (time > 199) {
         reject(time)
       } else {
         resolve(time)
@@ -12,10 +12,11 @@ const wait= (time: number) => {
 
 
 export const start = async () => {
-  const a = await wait(1000);
+  const a = await wait(101);
   console.log('a' + a)
-  const b = await wait(2000);
+  const b = await wait(102);
   console.log('b' + b)
-  const c = await wait(1000);
+  const c = await wait(103);
   console.log('c' + c)
+  return c
 }
