@@ -7,10 +7,8 @@ export default function <T extends IYueshuType>(arg: T) : never {
     switch (type) {
         case 'string':
             const a = arg + "a";
-            return arg
             break;
         default:
-            return arg
     }
 }
 

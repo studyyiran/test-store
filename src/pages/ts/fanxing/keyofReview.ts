@@ -7,7 +7,7 @@ interface Interface {
 }
 
 const funcA : <T extends Interface, K extends keyof Interface>(enter: T, key: K) => T = (a) => {
-    a = a + 'asd'
+    // a = a + 'asd'
     switch(typeof a) {
         case 'string':
             const b = a + '123';
