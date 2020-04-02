@@ -27,6 +27,7 @@ import { TestKey2 } from "./pages/reactKeys/testKey2";
 import Inline1 from "./pages/cssPlayGround/inline";
 import TestReactFunc from "./pages/testReactFunc";
 import TestPromise from "./pages/promise";
+import {TestHook} from "./pages/testhook";
 
 export const routerConfig = [
   // {
@@ -154,5 +155,10 @@ export const routerConfig = [
   {
     path: "/test-promise",
     Component: TestPromise
+  },
+  {
+    path: "/test-hook",
+    Component: TestHook
   }
+
 ];
