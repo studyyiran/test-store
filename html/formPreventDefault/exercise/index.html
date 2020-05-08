@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <form id="form1" action="http://localhost:4001/test" method="get">
+        <div id="input-container">
+            <label for="get">Get</label>
+            <input id="get" type="checkbox" value="get" name="input1" />
+            <label for="post">Post</label>
+            <input id="post" type="checkbox" value="post" name="input2" />
+        </div>
+
+        <input id="POST-name" type="text" name="input3">
+        <input type="submit" value="提交" />
+    </form>
+    <script>
+        const form1 = document.querySelector('#form1')
+        form1.addEventListener('submit', (e) => {
+          // e.preventDefault()
+        })
+        const inputContainer = document.querySelector('#input-container')
+
+        const inputs = document.querySelectorAll('input')
+        inputs.forEach((dom) => {
+
+          /*click change 这说明，不同的事件 有不同的default。得选准了
+          而相对的，对于点击来说，你用change或者click似乎区别就不是很大了。
+          * */
+          dom.addEventListener('click', (e) => {
+            console.log('get it')
+            e.preventDefault()
+          })
+        })
+        inputContainer.addEventListener('change', (e) => {
+          // 直接设定value
+          form1.method = e.target.value;
+
+          inputs.forEach((dom) => {
+                if (dom === e.target) {
+                    // dom.checked = true
+                } else {
+                  // dom.checked = false
+                }
+          })
+        })
+
+
+    </script>
+</body>
+</html>
