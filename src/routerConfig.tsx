@@ -28,6 +28,7 @@ import Inline1 from "./pages/cssPlayGround/inline";
 import TestReactFunc from "./pages/testReactFunc";
 import TestPromise from "./pages/promise";
 import {TestHook} from "./pages/testhook";
+import {AntdTree} from "./pages/testAntd/tree";
 
 export const routerConfig = [
   // {
@@ -159,6 +160,10 @@ export const routerConfig = [
   {
     path: "/test-hook",
     Component: TestHook
+  },
+  {
+    path: '/test-antd-tree',
+    Component: AntdTree
   }
 
 ];
