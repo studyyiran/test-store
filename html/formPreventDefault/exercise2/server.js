@@ -4,21 +4,41 @@ const target = http.createServer((req, res) => {
   const {url, method} = req
   const startTime = Date.now()
   function getTime() {
-    return Date.now() - startTime
+    return Number(Date.now()) - Number(startTime)
   }
+  res.statusCode = 500
+  // res.setHeader('Content-Type', 'text/html')
+  // 这块似乎要设置成这样 他才正常，原因不明（得去看书）
+  res.setHeader('Content-Type', 'application/json')
+  // 报错还是有问题
+  req.on('error', () => {
+    console.log('get it')
+    res.end('error')
+  })
+  res.on('error', () => {
+    console.log('get it')
+    res.end('error')
+  })
   if (method === 'GET') {
     //  解析获得参数
-    res.write(getTime());
-    res.write(url);
+    const time = getTime()
+    console.log(time)
+    // 这块也原因不明（还是得去看书）
+    res.write(String(decodeURIComponent(url)));
+    // res.write(time);
+    res.write(String(time));
     res.end()
   } else {
+    let content
     // 从xx中解析获得参数
     req.on('data', (data) => {
       console.log(data)
+      content = decodeURIComponent(data)
     })
-    req.on('end', () => {
+    req.on('end', (data) => {
       console.log('post finish')
-      res.write(getTime());
+      console.log(data)
+      res.write(content);
       res.end()
     })
   }

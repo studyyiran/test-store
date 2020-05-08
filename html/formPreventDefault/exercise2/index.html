@@ -5,8 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-    <form method="get" >
-
+    <form method="get" action="http://localhost:8080/test">
+        <input type="radio" name="type" value="get"/>
+        <input type="radio" name="type" value="post"/>
+        <input name="content" />
+        <input type="submit" />
     </form>
+    <script>
+        // input现在应用是没问题了。
+        const inputs = document.querySelectorAll("input[name='type']")
+        console.log(inputs)
+        const form = document.querySelector("form")
+        inputs.forEach((inputDom) => {
+          inputDom.addEventListener('click', (e) => {
+            e.preventDefault();
+            form.method = e.target.value
+          })
+        })
+    </script>
 </body>
 </html>
