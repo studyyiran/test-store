@@ -5,13 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-    <form method="get" action="http://localhost:8080/test">
-        <input type="radio" name="type" value="get"/>
-        <input type="radio" name="type" value="post"/>
-        <input name="content" />
-        <input type="submit" />
-    </form>
+    <div>
+        <form method="get" action="http://localhost:8080/test">
+            <input type="radio" name="type" value="get"/>
+            <input type="radio" name="type" value="post"/>
+            <input name="content" />
+            <input type="submit" />
+        </form>
+        <button id="form-reset">reset</button>
+        <button id="form-submit">submit</button>
+    </div>
+
+
     <script>
+        // button
+        document.querySelector('#form-reset').addEventListener('click', () => {
+          form.reset()
+        })
+
+        document.querySelector('#form-submit').addEventListener('click', () => {
+          form.submit()
+        })
+
         // input现在应用是没问题了。
         const inputs = document.querySelectorAll("input[name='type']")
         console.log(inputs)

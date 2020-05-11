@@ -8,8 +8,9 @@ const target = http.createServer((req, res) => {
   }
   res.statusCode = 500
   // res.setHeader('Content-Type', 'text/html')
+  res.setHeader('Content-Type', 'text/html; charset=utf-8')
   // 这块似乎要设置成这样 他才正常，原因不明（得去看书）
-  res.setHeader('Content-Type', 'application/json')
+  // res.setHeader('Content-Type', 'application/json; charset=utf-8')
   // 报错还是有问题
   req.on('error', () => {
     console.log('get it')
