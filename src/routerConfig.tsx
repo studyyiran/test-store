@@ -29,13 +29,9 @@ import TestReactFunc from "./pages/testReactFunc";
 import TestPromise from "./pages/promise";
 import {TestHook} from "./pages/testhook";
 import {AntdTree} from "./pages/testAntd/tree";
+import {TestForm} from "./pages/testAntd/form";
 
 export const routerConfig = [
-  // {
-  //   exact: true,
-  //   path: "/",
-  //   Component: Main
-  // },
   {
     path: "/a",
     Component: TestUseEffect
@@ -164,6 +160,14 @@ export const routerConfig = [
   {
     path: '/test-antd-tree',
     Component: AntdTree
-  }
-
+  },
+  {
+    path: '/test-antd-form',
+    Component: TestForm
+  },
+  {
+    exact: true,
+    path: "/main",
+    Component: Main
+  },
 ];

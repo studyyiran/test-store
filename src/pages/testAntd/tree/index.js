@@ -48,8 +48,8 @@ export class AntdTree extends React.Component {
         debugger
         const dropKey = info.node.props.eventKey;
         const dragKey = info.dragNode.props.eventKey;
-        // const dropPos = info.node.props.pos.split('-');
-        // const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1]);
+        const dropPos = info.node.props.pos.split('-');
+        const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1]);
 
         const loop = (data, key, callback) => {
             for (let i = 0; i < data.length; i++) {
