@@ -10,7 +10,7 @@
     "@types/react-router-dom": "^5.1.1",
     "antd": "^3.24.3",
     "moment": "^2.24.0",
-    "mongoose": "^5.9.10",
+    "mongoose": "^5.9.13",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

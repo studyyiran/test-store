@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
 
-const {Schema, Model} = mongoose
+const {Schema, model} = mongoose
 
 const StudentSchema = Schema({
     name: String,
     info: [
         {
+            age: Number,
             arr: [
                 {
                     school: {
@@ -22,15 +23,21 @@ const SchoolSchema = Schema({
   schoolName: String
 })
 
-const StudentModel = Model('Student', StudentSchema)
-const SchoolModel = Model('School', SchoolSchema)
+const StudentModel = model('Student', StudentSchema)
+const School = model('School', SchoolSchema)
 
-const connect = mongoose.connect('mongod://localhost/test', {})
+const connect = () => mongoose.connect('mongodb://localhost/test', {})
 
 async function start() {
     await connect()
-    const newSchool = await SchoolModel.create({schoolName: '1'})
-    const newStudent = await StudentModel.create({name: 's1', info: [{arr: [{school: newSchool._id}]}]})
-    const result = await SchoolModel.findOne({}).populate('school').exec()
-    console.log(result)
+    await StudentModel.deleteMany();
+    const newSchool = await School.create({schoolName: '1', _id: new mongoose.Types.ObjectId()})
+    const newStudent = await StudentModel.create({name: 's1', info: [{age: 123,arr: [{school: newSchool._id}]}]})
+    const result = await StudentModel.findOne({}).populate('school').exec()
+    const school = await School.find()
+    // const result = await StudentModel.findOne()
+    console.log(result.info[0].arr)
+    console.log(school)
 }
+
+start();
