@@ -10,11 +10,16 @@ const StudentSchema = Schema({
             arr: [
                 {
                     school: {
-                        type: mongoose.Schema.Types.ObjectId,
-                        ref: 'School'
+                        type: String,
                     }
                 }
             ]
+        }
+    ],
+    school: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'School'
         }
     ]
 })
@@ -32,12 +37,13 @@ async function start() {
     await connect()
     await StudentModel.deleteMany();
     const newSchool = await School.create({schoolName: '1', _id: new mongoose.Types.ObjectId()})
-    const newStudent = await StudentModel.create({name: 's1', info: [{age: 123,arr: [{school: newSchool._id}]}]})
-    const result = await StudentModel.findOne({}).populate('school').exec()
+    const newStudent = await StudentModel.create({name: 's1', school: [newSchool._id], info: [{age: 123,arr: [{school: newSchool._id}]}]})
+    const result = await StudentModel.findOne({})
     const school = await School.find()
     // const result = await StudentModel.findOne()
+    console.log(result)
     console.log(result.info[0].arr)
-    console.log(school)
+
 }
 
 start();
