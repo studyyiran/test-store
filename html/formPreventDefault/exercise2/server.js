@@ -20,15 +20,25 @@ const target = http.createServer((req, res) => {
     console.log('get it')
     res.end('error')
   })
+  process.on('uncaughtException', err => {
+    console.error('There was an uncaught error', err)
+    // process.exit(1) //mandatory (as per the Node.js docs)
+    res.end('error')
+  })
   if (method === 'GET') {
-    //  解析获得参数
-    const time = getTime()
-    console.log(time)
-    // 这块也原因不明（还是得去看书）
-    res.write(String(decodeURIComponent(url)));
-    // res.write(time);
-    res.write(String(time));
-    res.end()
+    try {
+      throw new Error('Ran out of coffee')
+      //  解析获得参数
+      const time = getTime()
+      console.log(time)
+      // 这块也原因不明（还是得去看书）
+      res.write(String(decodeURIComponent(url)));
+      // res.write(time);
+      res.write(String(time));
+      res.end()
+    } catch(e) {
+      res.end('hehe')
+    }
   } else {
     let content
     // 从xx中解析获得参数
@@ -43,6 +53,8 @@ const target = http.createServer((req, res) => {
       res.end()
     })
   }
-}).listen('8080', () => {
-  console.log('is listening')
+})
+
+target.listen('8080', () => {
+  console.log('is listening at 8080')
 })

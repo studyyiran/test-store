@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form>
+        <label>key1<input id="key1" name="key1" required/></label>
+
+        <label>submit <input id="submit" type="submit"/></label>
+
+    </form>
+    <script>
+        const form = document.querySelector('form')
+        form.addEventListener('submit', (e) => {
+          console.log(e)
+          console.log(e.target)
+        })
+    </script>
+</body>
+</html>
