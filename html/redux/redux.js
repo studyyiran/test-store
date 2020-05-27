@@ -13,6 +13,17 @@ redux.applyMiddlerWare = (...arg) => {
       trigger = function (store) {
         m(store, trigger)
       }
+
+      trigger = m(store) => {
+        (next) => {
+          (action) => {
+            trigger(action)
+          }
+        }
+      }
+
+
+      trigger = m(store)(trigger)(action)
     })
 
     return (action) => {

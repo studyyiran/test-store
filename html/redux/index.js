@@ -1,9 +1,9 @@
 const {redux, applyMiddlerWare} = require('./redux')
 
-const m1 = (store, next) => {
+const m1 = (store, next, action) => {
   const currentState = store.getState();
   setTimeout(() => {
-    next()
+    next(action)
   }, 1000)
 }
 
