@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        function compose(...arg) {
+            // [].slice.call(arguments, 0).forEach((f) => {
+            //     console.log(f)
+            // })
+            return arg.reduce((f1, f2) => {
+                console.log('enter')
+                return (...something) => {
+                    return f1(f2(...something));
+                }
+            })
+        }
+
+        const p = 0.4;
+        let count = 20
+        const length = 3
+        const calc1 = (amout) => {
+            return amout * p
+        }
+
+        const calc2 = (amount) => {
+            return amount + calc1(amount)
+        }
+
+
+        const after1type = calc2(100)
+        const after2year = calc2(calc2(100))
+
+        let arr = []
+        for (let t = 0; t < length; t++) {
+            arr.push(calc2)
+        }
+        arr.unshift((v) => {
+            console.log(v)
+        })
+
+        const abc = [1,2,3].reduce((a,b) => {
+            return a + b
+        })
+
+        const result = compose(arr);
+        console.log(result)
+        result(100)
+    </script>
+</body>
+</html>
