@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            background: red;
+            width: 10px;
+            height: 10px;
+            transition: width 2s linear, transform 0.1s linear;
+            position: absolute;
+        }
+        .transition:hover {
+            width:100px;
+
+        }
+        .transform:hover {
+            transform: rotate(35deg);
+        }
+        @keyframes rotate{
+            from {
+                transform: rotate(0);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .keyframes {
+            animation: rotate 0.3s infinite linear;
+        }
+    </style>
+</head>
+<body>
+    <div class="transition transform">123</div>
+    <div class="keyframes"></div>
+</body>
+</html>
