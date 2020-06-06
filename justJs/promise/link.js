@@ -17,6 +17,23 @@
  */
 
 
+/*
+对于js，不要在短时间内过分纠结，
+一步步来。
+他有时候想webpack一样需要很全面，很深入的知识。
+你不能和他死磕。要迂回。
+不要固执的寻求最优解，要一点点来。
+
+对的，这种东西，就应该，在短期内，
+进行高频率的接触。但是每次都很短。
+ */
+
+/*
+昨天晚上应该抽空再看一眼。
+我有空的时候，把相关的文章在整理一下。
+再多写一些。
+ */
+
 function MyPromise() {
   /*
   这个this指向水？
@@ -36,7 +53,7 @@ function MyPromise() {
   }
   // 在哪里定义静态方法呢？
   function then(callback) {
-    callback(_resolve, _reject)
+    callback && callback(_resolve, _reject)
     return this
   }
 
@@ -57,13 +74,7 @@ function MyPromise() {
 
 
   if (typeof this.then !== "function") {
-    console.log(MyPromise.prototype.constructor)
-    MyPromise.prototype = {
-      constructor: MyPromise.prototype.constructor,
-      then: function () {
-
-      },
-    };
+    MyPromise.prototype.then = then
     // MyPromise.prototype.then = then
     console.log(MyPromise.prototype)
   }
